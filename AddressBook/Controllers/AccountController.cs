@@ -16,10 +16,9 @@ namespace AddressBook.Controllers
     {//[Authorize]
         [HttpGet]
         public ActionResult Index(int id = 0)
-        {//erereere
+        {
             ViewBag.btnSaveTitle = true;
             ViewBag.btnCancelEnable = false;
-            //fgf fgf gff
 
             if (id == 0)
                 return View();
@@ -153,7 +152,7 @@ namespace AddressBook.Controllers
                     if (foundUser != null)
                     {
                         user = Membership.GetUser(foundUser.UserName.ToString());
-                        //var token = WebSecurity.GeneratePasswordResetToken(foundUser.UserName);
+                        var token = WebSecurity.GeneratePasswordResetToken(foundUser.UserName);
                         string resetLink = "<a href='"
                       + Url.Action("ResetPassword", "Account", new { rt = "token" }, "http")
                       + "'>Reset Password Link</a>";
