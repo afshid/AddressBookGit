@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AddressBook.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+<h2>Index</h2>
+<script>
+    $(function () {
+        $("#searchInput").change(function (evnt) {
+            $("#dvContactsList").load("@(Url.Action("GetContactsList","Contact",null,Request.Url.Scheme))?searchInput=" + $(this).val());
+        });
+    });
+</script>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="editor-field">
+    @Html.Label("Search: ")
+    @Html.TextBox("searchInput")</br>
+</div>
+<div id="dvContactsList">
+    @{Html.RenderPartial("ContactsList",Model);}
+</div>
