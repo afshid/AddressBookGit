@@ -46,7 +46,6 @@ namespace AddressBook.Controllers
                         ABEntity.Contacts.Add(contact);
                     else
                     {
-                        ABEntity.Contacts.Add(contact);
                         var selContact = ABEntity.Contacts.First(c => c.ContactID == contact.ContactID);
                         selContact.FirstName = contact.FirstName;
                         selContact.LastName = contact.LastName;
@@ -54,10 +53,6 @@ namespace AddressBook.Controllers
                         selContact.StreetName = contact.StreetName;
                         selContact.Province = contact.Province;
                         selContact.PostalCode = contact.PostalCode;
-
-
-                        //gfgfg
-                        //dfdfdfdfdf
                         selContact.Country = contact.Country;
                     }
                     ABEntity.SaveChanges();
