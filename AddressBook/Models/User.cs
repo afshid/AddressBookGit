@@ -11,6 +11,7 @@ namespace AddressBook.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     
@@ -49,7 +50,9 @@ namespace AddressBook.Models
         [NotMapped]
         public string ConfirmPassword { get; set; }
 
+        [DefaultValue(false)]
         [Display(Name = "Administrator")]
         public bool UserType { get; set; }
+
     }
 }

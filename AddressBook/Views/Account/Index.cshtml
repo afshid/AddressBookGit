@@ -62,7 +62,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon forrm-required">*</span>
-                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Password)
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon forrm-required">*</span>
-                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ConfirmPassword)
                     </div>
                 </div>

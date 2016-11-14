@@ -1,7 +1,7 @@
 ﻿@model AddressBook.Models.Contact
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "newform";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,9 +9,10 @@
     <h2 id="h1titel" style="display: block; text-align: center" title="contact">Contact</h2>
 </div>
 
-@using (Html.BeginForm()){
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    
     <div class="panel panel-primary form-horizontal">
         <div class="panel-heading">
             <asp:Label ID="lblHead" runat="server"><h2>Contact</h2></asp:Label>
@@ -29,6 +30,7 @@
                 </div>
                 <div class="col-sm-2"></div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 @Html.LabelFor(model => model.LastName, new { @class = "col-sm-2" })
@@ -53,6 +55,7 @@
                 </div>
                 <div class="col-sm-2"></div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 @Html.LabelFor(model => model.StreetName, new { @class = "col-sm-2" })
@@ -93,6 +96,7 @@
                     <div class="col-sm-2"></div>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 @Html.LabelFor(model => model.PostalCode, new { @class = "col-sm-2" })
@@ -107,6 +111,7 @@
                     <div class="col-sm-2"></div>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 @Html.LabelFor(model => model.Country, new { @class = "col-sm-2" })
@@ -131,8 +136,8 @@
                 </div>
 
             </div>
+            </div>
         </div>
-    </div>
 }
 
 <div>

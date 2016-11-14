@@ -9,10 +9,12 @@ namespace AddressBook.Controllers
 {
     public class ContactController : Controller
     {
-        [Authorize]
+        //[Authorize]
 
         public ActionResult Index()
         {
+            ViewBag.btnSaveTitle = true;
+            ViewBag.btnCancelEnable = false;
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
                 return View(ABEntity.Contacts.ToList());
@@ -22,6 +24,8 @@ namespace AddressBook.Controllers
         [HttpGet]
         public ActionResult Create(int id=0)
         {
+            ViewBag.btnSaveTitle = true;
+            ViewBag.btnCancelEnable = false;
             if (id == 0)
                 return View();
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
@@ -33,7 +37,7 @@ namespace AddressBook.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Contact contact, string btnCancel)
+        public ActionResult Create(Contact contact, string btnCancel,int id=0)
         {
             if (btnCancel != null)
                 return RedirectToAction("Index");
@@ -41,11 +45,11 @@ namespace AddressBook.Controllers
             {
                 using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
                 {
-                    if (contact.ContactID == 0)
+                    if (id == 0)
                         ABEntity.Contacts.Add(contact);
                     else
                     {
-                        var selContact = ABEntity.Contacts.First(c => c.ContactID == contact.ContactID);
+                        var selContact = ABEntity.Contacts.First(c => c.ContactID == id);
                         selContact.FirstName = contact.FirstName;
                         selContact.LastName = contact.LastName;
                         selContact.Phone = contact.Phone;
@@ -56,7 +60,6 @@ namespace AddressBook.Controllers
                     }
                     ABEntity.SaveChanges();
                     ModelState.Clear();
-                    contact = null;
                     ViewBag.Message = "Successfuly Registration Done.";
                 }
             }
@@ -104,5 +107,11 @@ namespace AddressBook.Controllers
 
         }
     
+        public ActionResult newform()
+        {
+            ViewBag.btnSaveTitle = true;
+            ViewBag.btnCancelEnable = false;
+            return View();
+        }
     }
 }
