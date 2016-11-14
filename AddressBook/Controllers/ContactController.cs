@@ -9,8 +9,7 @@ namespace AddressBook.Controllers
 {
     public class ContactController : Controller
     {
-        //
-        // GET: /Contact/
+        [Authorize]
 
         public ActionResult Index()
         {

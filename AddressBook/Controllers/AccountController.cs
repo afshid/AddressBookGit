@@ -1,19 +1,19 @@
 ﻿using AddressBook.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
-
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace AddressBook.Controllers
 {
-    
+
     public class AccountController : Controller
-    {//[Authorize]
+    {   //[Authorize]
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
@@ -30,34 +30,33 @@ namespace AddressBook.Controllers
             }
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Index(User user, string btnCancel)
+        public ActionResult Index(User user, string btnCancel, int id = 0)
         {
             if (btnCancel != null)
                 return RedirectToAction("Index", new { id = 0 });
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
+                ABEntity.Configuration.ValidateOnSaveEnabled = false;
                 if (ModelState.IsValid)
                 {
-                    if (user.UserID == 0)
+                    if (id == 0)
                     {
-
-                        //user.Password = Helpers.Encode(user.Password);
+                        user.Password = Helpers.Encode(user.Password);
                         ABEntity.Users.Add(user);
                     }
                     else
                     {
-                        var selUser = ABEntity.Users.First(c => c.UserID == user.UserID);
+                        var selUser = ABEntity.Users.First(c => c.UserID == id);
                         selUser.FirstName = user.FirstName;
                         selUser.LastName = user.LastName;
                         selUser.UserName = user.UserName;
-                        selUser.Password = user.Password;
+                        selUser.Password = Helpers.Encode(user.Password);
                         selUser.UserType = user.UserType;
                     }
-
                     ABEntity.SaveChanges();
                     ModelState.Clear();
-                    user = null;
                     ViewBag.Message = "Successfuly Registration Done.";
                 }
 
@@ -65,7 +64,7 @@ namespace AddressBook.Controllers
             }
         }
 
-       public JsonResult IsUsernameAvailable(string username)
+        public JsonResult IsUsernameAvailable(string username)
         {
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
@@ -73,7 +72,7 @@ namespace AddressBook.Controllers
                 return Json(user == null);
             }
         }
-        
+
         public ActionResult List()
         {
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
@@ -112,7 +111,7 @@ namespace AddressBook.Controllers
 
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
-                //user.Password = Helpers.Encode(user.Password);
+                user.Password = Helpers.Encode(user.Password);
                 var userobj = ABEntity.Users.Where(m => m.UserName == user.UserName && m.Password == user.Password).FirstOrDefault();
                 if (userobj != null)
                 {
@@ -179,7 +178,7 @@ namespace AddressBook.Controllers
                         ModelState.AddModelError("", "No user found by that email.");
                     }
                 }
-             }
+            }
             return View(forgotpassword);
         }
     }

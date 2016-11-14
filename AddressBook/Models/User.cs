@@ -16,20 +16,24 @@ namespace AddressBook.Models
     
     public partial class User
     {
-        //[Key]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
 
+        [StringLength(50, ErrorMessage = "First Name cannot be longer than 50 characters.")]
         [DataType(DataType.Text)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [StringLength(50, ErrorMessage = "Last Name cannot be longer than 50 characters.")]
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [StringLength(50, ErrorMessage = "Username cannot be longer than 50 characters.")]
         [System.Web.Mvc.Remote("IsUsernameAvailable", "Account", HttpMethod = "POST", ErrorMessage = "Username already exists. Please enter a different user name.")]
         [Required(ErrorMessage = "Please Provide Username", AllowEmptyStrings = false)]
-        [DataType(DataType.EmailAddress)]
+        //[DataType(DataType.EmailAddress)]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
@@ -45,7 +49,6 @@ namespace AddressBook.Models
         [NotMapped]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         [Display(Name = "Administrator")]
         public bool UserType { get; set; }
     }
