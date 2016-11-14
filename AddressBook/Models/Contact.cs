@@ -11,17 +11,50 @@ namespace AddressBook.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Contact
     {
         public int ContactID { get; set; }
+
+        [Required(ErrorMessage = "Please Provide First Name", AllowEmptyStrings = false)]
+        [StringLength(50, ErrorMessage = "First Name cannot be longer than 50 characters.")]
+        [DataType(DataType.Text)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please Provide Last Name", AllowEmptyStrings = false)]
+        [StringLength(50, ErrorMessage = "Last Name cannot be longer than 50 characters.")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please Provide Phone Number", AllowEmptyStrings = false)]
+        [StringLength(20, ErrorMessage = "Phone Number cannot be longer than 20 characters.")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone")]
         public string Phone { get; set; }
+
+        [StringLength(50, ErrorMessage = "Street Name cannot be longer than 50 characters.")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Street Name")]
         public string StreetName { get; set; }
+
+        [StringLength(50, ErrorMessage = "City Name cannot be longer than 50 characters.")]
+        [DataType(DataType.Text)]
+        [Display(Name = "City")]
         public string City { get; set; }
+
+        [StringLength(50, ErrorMessage = "Province Name cannot be longer than 50 characters.")]
+        [Display(Name = "Province")]
         public string Province { get; set; }
+
+        [StringLength(10, ErrorMessage = "Postal Code cannot be longer than 10 characters.")]
+        [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
+
+        [StringLength(50, ErrorMessage = "Country Name cannot be longer than 50 characters.")]
+        [Display(Name = "Country")]
         public string Country { get; set; }
     }
 }

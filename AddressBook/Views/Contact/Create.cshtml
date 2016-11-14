@@ -5,85 +5,136 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="jumbotron">
+    <h2 id="h1titel" style="display: block; text-align: center" title="contact">Contact</h2>
+</div>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.ContactID)
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <asp:Label ID="lblHead" runat="server"><h2>Contact</h2></asp:Label>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.FirstName, new { @class = "col-sm-2" })
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required"></span>
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.LastName)
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required"></span>
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.Phone)
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        @Html.EditorFor(model => model.Phone)
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.StreetName)
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        @Html.EditorFor(model => model.StreetName)
+                        @Html.ValidationMessageFor(model => model.StreetName)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
 
-    <fieldset>
-        <legend>Contact</legend>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.City)
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        @Html.EditorFor(model => model.City)
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FirstName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
-        </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.Province)
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Province)
+                            @Html.ValidationMessageFor(model => model.Province)
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
-        </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    @Html.LabelFor(model => model.PostalCode)
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon forrm-required">*</span>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Phone)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Phone)
-            @Html.ValidationMessageFor(model => model.Phone)
-        </div>
+                            @Html.EditorFor(model => model.PostalCode)
+                            @Html.ValidationMessageFor(model => model.PostalCode)
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StreetName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StreetName)
-            @Html.ValidationMessageFor(model => model.StreetName)
-        </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    @Html.LabelFor(model => model.Country)
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon forrm-required">*</span>
+                            @Html.EditorFor(model => model.Country)
+                            @Html.ValidationMessageFor(model => model.Country)
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
+                <div class="form-group">
+                    <div class="col-sm-9"></div>
+                    <div class="btn-group">
+                        <input type="submit" value=@((bool)ViewBag.btnSaveTitle ? "Create" : "Edit") name="btnSave">
+                    </div>
+                    <div class="btn-group" style="direction:rtl">
+                        <input type="submit" value="Cancel" name="btnCancel" @((bool)ViewBag.btnCancelEnable ? "" : "disabled=\"disabled\"")>
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Province)
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Province)
-            @Html.ValidationMessageFor(model => model.Province)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PostalCode)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PostalCode)
-            @Html.ValidationMessageFor(model => model.PostalCode)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Country)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Country)
-            @Html.ValidationMessageFor(model => model.Country)
-        </div>
-
-        <p>
-            <input type="submit" value=@((bool)ViewBag.btnSaveTitle ? "Create" : "Edit") name="btnSave">
-            <input type="submit" value="Cancel" name="btnCancel" @((bool)ViewBag.btnCancelEnable ? "" : "disabled=\"disabled\"")>
-        </p>
-    </fieldset>
+    </div>
 }
 
 <div>

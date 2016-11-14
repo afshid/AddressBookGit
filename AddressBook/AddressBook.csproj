@@ -294,7 +294,6 @@
     <Content Include="Views\Contact\Create.cshtml" />
     <Content Include="Views\Account\Forgot.cshtml" />
     <Content Include="Views\Contact\ContactsList.cshtml" />
-    <Content Include="Views\Contact\GetContactsList.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

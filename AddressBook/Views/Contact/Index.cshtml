@@ -4,8 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
-<h2>Index</h2>
+<div class="jumbotron">
+    <h2 id="h1titel" style="display: block; text-align: center" title="Anfragen und Mitteilungen">Contacts</h2>
+</div>
 <script>
     $(function () {
         $("#searchInput").change(function (evnt) {
@@ -17,11 +18,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-<div class="editor-field">
-    @Html.Label("Search: ")
-    @Html.TextBox("searchInput")</br>
+<div class="panel-body">
+    <div class="form-group">
+        @Html.Label("Search: ", new { @class = "col-sm-1" })
+        <div class="col-sm-4">
+            <div class="input-group">
+                @Html.TextBox("searchInput", null, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-sm-5"></div>
+    </div>
 </div>
 <div id="dvContactsList">
-    @{Html.RenderPartial("ContactsList",Model);}
+    @{Html.RenderPartial("ContactsList", Model);}
 </div>
