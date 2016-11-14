@@ -5,39 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Login</h2>
+<div class="jumbotron">
+    <h2 id="h1titel" style="display: block; text-align: center" title="Account Management">login</h2>
+</div>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>User</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+    <div class="panel panel-primary form-horizontal">
+        <div class="panel-heading">
+            <asp:Label ID="lblHead" runat="server"><h2>Login</h2></asp:Label>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.UserName, new { @class = "col-sm-2" })
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                @Html.LabelFor(model => model.Password, new { @class = "col-sm-2" })
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <span class="input-group-addon forrm-required">*</span>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9"></div>
+                <div class="btn-group" style="direction:rtl">
+                    <input type="submit" value="Login" />
+                </div>
+            </div><p>
+    @Html.ActionLink("Forgot Password", "Forgot")
+</p>
         </div>
+    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
 
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        <p>
-
-            <input type="submit" value="Login" />
-        </p>
-        <p>
-            @Html.ActionLink("Forgot Password", "Forgot")
-        </p>
-    </fieldset>
 }
 
 
