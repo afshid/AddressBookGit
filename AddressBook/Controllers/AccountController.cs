@@ -144,16 +144,14 @@ namespace AddressBook.Controllers
             {
                 using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
                 {
-                    MembershipUser user;
                     var foundUser = (from u in ABEntity.Users
                                      where u.UserName == forgotpassword.Email
                                      select u).FirstOrDefault();
                     if (foundUser != null)
                     {
-                        user = Membership.GetUser(foundUser.UserName.ToString());
-                        var token = WebSecurity.GeneratePasswordResetToken(foundUser.UserName);
+                        var tempPass = Membership.GeneratePassword(8, 4);
                         string resetLink = "<a href='"
-                      + Url.Action("ResetPassword", "Account", new { rt = "token" }, "http")
+                      + Url.Action("ResetPassword", "Account", new { id = foundUser.UserID, tp = tempPass }, "http")
                       + "'>Reset Password Link</a>";
 
                         string subject = "Reset your password for jmqtnonsense.ca";
@@ -167,6 +165,7 @@ namespace AddressBook.Controllers
                         try
                         {
                             client.Send(message);
+
                         }
                         catch (Exception e)
                         {
@@ -180,6 +179,35 @@ namespace AddressBook.Controllers
                 }
             }
             return View(forgotpassword);
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(int id, string tp)
+        {
+            ViewBag.userID = 1;// id;
+            ViewBag.tempPass = "defgrgnv";// tp;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(User user, int id=0)
+        {
+            if (ModelState.IsValid)
+            {
+                using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
+                {
+                    if (id != 0)
+                    {
+                        var selUser = ABEntity.Users.First(c => c.UserID == id);
+                        selUser.Password = Helpers.Encode(user.Password);
+                        ABEntity.SaveChanges();
+                        ModelState.Clear();
+                        ViewBag.Message = "Successfuly change password Done.";
+                    }
+                }
+            }
+            
+            return View();
         }
     }
 }
