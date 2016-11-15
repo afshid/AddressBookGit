@@ -13,7 +13,7 @@ namespace AddressBook.Controllers
 {
 
     public class AccountController : Controller
-    {   //[Authorize]
+    {   [Authorize]
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
