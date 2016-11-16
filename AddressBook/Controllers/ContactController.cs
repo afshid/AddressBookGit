@@ -7,9 +7,10 @@ using System.Web.Mvc;
 
 namespace AddressBook.Controllers
 {
+    //[Authorize]
     public class ContactController : Controller
     {
-        //[Authorize]
+        
 
         public ActionResult Index()
         {

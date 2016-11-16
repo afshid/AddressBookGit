@@ -1,9 +1,10 @@
-﻿@model AddressBook.Models.User
+﻿@model AddressBook.ViewModels.Login
 
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="jumbotron">
     <h2 id="h1titel" style="display: block; text-align: center" title="Account Management">login</h2>
@@ -48,8 +49,8 @@
                     <input type="submit" value="Login" />
                 </div>
             </div><p>
-    @Html.ActionLink("Forgot Password", "Forgot")
-</p>
+                @Html.ActionLink("Forgot Password", "Forgot")
+            </p>
         </div>
     </div>
 

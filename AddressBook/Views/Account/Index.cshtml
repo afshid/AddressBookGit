@@ -6,6 +6,9 @@
 }
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script>
+
+</script>
 <div class="jumbotron">
     <h2 id="h1titel" style="display: block; text-align: center" title="Account Management">Account Management</h2>
 </div>
@@ -96,7 +99,7 @@
                     <input type="submit" value=@((bool)ViewBag.btnSaveTitle ? "Create" : "Edit") name="btnSave" class="btn btn-primary form-control">
                 </div>
                 <div class="btn-group" style="direction:rtl">
-                    <input type="submit" value="Cancel" name="btnCancel" @((bool)ViewBag.btnCancelEnable ? "" : "disabled=\"disabled\"") class="btn btn-primary form-control">
+                    <input type="submit" value="Cancel" id="btnCancel" name="btnCancel" @((bool)ViewBag.btnCancelEnable ? "" : "disabled=\"disabled\"") class="btn btn-primary form-control cancel">
                 </div>
 
             </div>

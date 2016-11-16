@@ -1,4 +1,5 @@
 ﻿using AddressBook.Models;
+using AddressBook.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -13,7 +14,7 @@ namespace AddressBook.Controllers
 {
 
     public class AccountController : Controller
-    {   [Authorize]
+    {   //[Authorize]
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
@@ -106,23 +107,23 @@ namespace AddressBook.Controllers
             return View();
         }
 
-        public ActionResult Login(Models.User user)
+        public ActionResult Login(Login login)
         {
 
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
-                user.Password = Helpers.Encode(user.Password);
-                var userobj = ABEntity.Users.Where(m => m.UserName == user.UserName && m.Password == user.Password).FirstOrDefault();
+                login.Password = Helpers.Encode(login.Password);
+                var userobj = ABEntity.Users.Where(m => m.UserName == login.UserName && m.Password == login.Password).FirstOrDefault();
                 if (userobj != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    FormsAuthentication.SetAuthCookie(login.UserName, false);
                     Session["LoginedUser"] = userobj;
                     return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError("", "Login data is incorrect!");
             }
-            return View(user);
+            return View(login);
         }
 
         public ActionResult Logout()
