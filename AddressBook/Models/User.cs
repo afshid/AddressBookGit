@@ -32,7 +32,7 @@ namespace AddressBook.Models
         public string LastName { get; set; }
 
         [StringLength(50, ErrorMessage = "Username cannot be longer than 50 characters.")]
-        [System.Web.Mvc.Remote("IsUsernameAvailable", "Account", HttpMethod = "POST", ErrorMessage = "Username already exists. Please enter a different user name.")]
+        [System.Web.Mvc.Remote("IsUsernameAvailable", "Account", HttpMethod = "POST", ErrorMessage = "Username already exists. Please enter a different user name.", AdditionalFields = "InitialUsername")]
         [Required(ErrorMessage = "Please Provide Username", AllowEmptyStrings = false)]
         //[DataType(DataType.EmailAddress)]
         [Display(Name = "Username")]
