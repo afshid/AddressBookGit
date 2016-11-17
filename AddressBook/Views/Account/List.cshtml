@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<AddressBook.Models.User>
-
-<p>
-
-</p>
+@using AddressBook;
+@using System.Security.Cryptography;
+@{
+    RijndaelManaged Crypto = new RijndaelManaged();
+    System.Text.UTF8Encoding Byte_Transform = new System.Text.UTF8Encoding();
+}
 <table class="table table-striped">
     <tr>
         <th>
@@ -24,6 +26,7 @@
     {
         <tr>
             <td>
+                @*@Html.DisplayFor(modelItem => AddressBook.Helpers.Dencrypt_AES256(Byte_Transform.GetBytes(item.FirstName),Crypto.Key, Crypto.IV))*@
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
