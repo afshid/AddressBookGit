@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -14,7 +15,10 @@ namespace AddressBook.Controllers
 {
 
     public class AccountController : Controller
-    {   //[Authorize]
+    {
+        RijndaelManaged Crypto = new RijndaelManaged();
+
+        //[Authorize]
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
@@ -44,6 +48,9 @@ namespace AddressBook.Controllers
                 {
                     if (id == 0)
                     {
+                        //user.FirstName = Helpers.Encrypt_AES256(user.FirstName, Crypto.Key, Crypto.IV);
+                        //user.LastName = Helpers.Encrypt_AES256(user.LastName, Crypto.Key, Crypto.IV);
+                        //user.FirstName = Helpers.Dencrypt_AES256(new System.Text.UTF8Encoding().GetBytes(user.FirstName), Crypto.Key, Crypto.IV);
                         user.Password = Helpers.Encode(user.Password);
                         ABEntity.Users.Add(user);
                     }
