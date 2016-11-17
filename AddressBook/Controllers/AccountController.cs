@@ -65,8 +65,11 @@ namespace AddressBook.Controllers
             }
         }
 
-        public JsonResult IsUsernameAvailable(string username)
+        public JsonResult IsUsernameAvailable(string username, string InitialUsername)
         {
+            if (!string.IsNullOrEmpty(InitialUsername))
+                if (username == InitialUsername)
+                    return Json(true);
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
                 var user = ABEntity.Users.FirstOrDefault(c => c.UserName == username);
@@ -191,7 +194,7 @@ namespace AddressBook.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(User user, int id=0)
+        public ActionResult ResetPassword(User user, int id = 0)
         {
             if (ModelState.IsValid)
             {
@@ -207,7 +210,7 @@ namespace AddressBook.Controllers
                     }
                 }
             }
-            
+
             return View();
         }
     }
