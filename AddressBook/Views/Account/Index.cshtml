@@ -12,7 +12,23 @@
 <div class="jumbotron">
     <h2 id="h1titel" style="display: block; text-align: center" title="Account Management">Account Management</h2>
 </div>
-
+@*<script>
+    $().ready(function () {
+        $(this.forms[0]).validate(
+            {
+                rules: {
+                    firstname: "required",
+                    lastname: "required",
+                    username: {
+                        required: true,
+                        email:true
+                    },
+                    password: { required: true },
+                    confirmpassword: { required: true ,equalTo:"#password"}
+                }
+            });
+    });
+</script>*@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
