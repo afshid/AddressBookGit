@@ -7,11 +7,11 @@ using System.Web.Mvc;
 
 namespace AddressBook.Controllers
 {
-    //[Authorize]
+    
     public class ContactController : Controller
     {
-        
 
+[Authorize]
         public ActionResult Index()
         {
             ViewBag.btnSaveTitle = true;
@@ -23,7 +23,7 @@ namespace AddressBook.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(int id=0)
+        public ActionResult Create(int id = 0)
         {
             ViewBag.btnSaveTitle = true;
             ViewBag.btnCancelEnable = false;
@@ -38,7 +38,7 @@ namespace AddressBook.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Contact contact, string btnCancel,int id=0)
+        public ActionResult Create(Contact contact, string btnCancel, int id = 0)
         {
             if (btnCancel != null)
                 return RedirectToAction("Index");
@@ -65,7 +65,7 @@ namespace AddressBook.Controllers
                 }
             }
 
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
 
         }
 
@@ -92,22 +92,22 @@ namespace AddressBook.Controllers
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
                 //if (searchInput=="")
-                    //return PartialView(ABEntity.Contacts.ToList());
-                return PartialView("ContactsList",ABEntity.Contacts.Where(c => c.FirstName.Contains(searchInput) || c.LastName.Contains(searchInput)).ToList());
+                //return PartialView(ABEntity.Contacts.ToList());
+                return PartialView("ContactsList", ABEntity.Contacts.Where(c => c.FirstName.Contains(searchInput) || c.LastName.Contains(searchInput)).ToList());
             }
         }
 
-        
+
         public ActionResult Search(string searchInput)
         {
             using (AddressBookDBEntities ABEntity = new AddressBookDBEntities())
             {
                 var contact = ABEntity.Contacts.Where(c => c.FirstName.Contains(searchInput) || c.LastName.Contains(searchInput)).ToList();
-                return View("Index",ABEntity.Contacts.Where(c => c.FirstName.Contains(searchInput) || c.LastName.Contains(searchInput)).ToList());
+                return View("Index", ABEntity.Contacts.Where(c => c.FirstName.Contains(searchInput) || c.LastName.Contains(searchInput)).ToList());
             }
 
         }
-    
+
         public ActionResult newform()
         {
             ViewBag.btnSaveTitle = true;

@@ -13,12 +13,11 @@ using WebMatrix.WebData;
 
 namespace AddressBook.Controllers
 {
-
+//[Authorize]
     public class AccountController : Controller
     {
         RijndaelManaged Crypto = new RijndaelManaged();
-
-        //[Authorize]
+        
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
@@ -71,7 +70,7 @@ namespace AddressBook.Controllers
                 return View(user);
             }
         }
-
+    [AllowAnonymous]
         public JsonResult IsUsernameAvailable(string username, string InitialUsername)
         {
             if (!string.IsNullOrEmpty(InitialUsername))
@@ -128,7 +127,7 @@ namespace AddressBook.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(login.UserName, false);
                     Session["LoginedUser"] = userobj;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Contact");
                 }
 
                 ModelState.AddModelError("", "Login data is incorrect!");
@@ -139,7 +138,7 @@ namespace AddressBook.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Account", "Login");
+            return RedirectToAction("Login","Account");
         }
 
         [HttpGet]
