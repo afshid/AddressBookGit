@@ -17,6 +17,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.Hidden("InitialUsername", (Model==null)?"":Model.UserName)
     <div class="panel panel-primary form-horizontal">
 
         <div class="panel-heading">
